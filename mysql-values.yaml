@@ -1,0 +1,7 @@
+credentials:
+  root:
+    user: root
+    password: pass123
+    host: "%"
+tls:
+  useSelfSigned: true
