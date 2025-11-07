@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "nodeapp.labels" . | nindent 4 }}
+data:
+  DB_HOSTNAME: {{ .Values.config.dbHostname | quote }}
+  DB_PORT: {{ .Values.config.dbPort | quote }}
+  REDIS_HOSTNAME: {{ .Values.config.redisHostname | quote }}
+  REDIS_PORT: {{ .Values.config.redisPort | quote }}

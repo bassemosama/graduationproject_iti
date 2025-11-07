@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Values.app.name }}
+    {{- include "nodeapp.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.app.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+    spec:
+      containers:
+      - name: {{ .Values.app.name }}
+        image: "{{ .Values.app.image.repository }}:{{ .Values.app.image.tag }}"
+        imagePullPolicy: {{ .Values.app.image.pullPolicy }}
+        ports:
+        - containerPort: {{ .Values.app.service.targetPort }}
+        resources:
+          requests:
+            cpu: {{ .Values.app.resources.requests.cpu | quote }}
+            memory: {{ .Values.app.resources.requests.memory | quote }}
+          limits:
+            cpu: {{ .Values.app.resources.limits.cpu | quote }}
+            memory: {{ .Values.app.resources.limits.memory | quote }}
+        envFrom:
+        - configMapRef:
+            name: mysql-config
+        - secretRef:
+            name: mysql-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.app.service.name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "nodeapp.labels" . | nindent 4 }}
+spec:
+  selector:
+    app: {{ .Values.app.name }}
+  ports:
+  - name: app-port
+    protocol: TCP
+    port: {{ .Values.app.service.port }}
+    targetPort: {{ .Values.app.service.targetPort }}
+  type: {{ .Values.app.service.type }}
