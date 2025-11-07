@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+  namespace: default
+data:
+  DB_HOSTNAME: db-cluster.mysql-operator.svc.cluster.local
+  DB_PORT: "6450"
+  REDIS_HOSTNAME: redis-service
+  REDIS_PORT: "6379"
