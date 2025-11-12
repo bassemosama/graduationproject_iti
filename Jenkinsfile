@@ -2,7 +2,7 @@ pipeline {
   agent none
 
   triggers {
-    githubPush()   // automatically run when a push happens
+    githubPush()   // still listen for GitHub push events
   }
 
   environment {
@@ -12,6 +12,9 @@ pipeline {
 
   stages {
     stage('Build & Push Image with Kaniko') {
+      when {
+        changeset "nodeapp/**"   // 👈 only run when files inside nodeapp/ change
+      }
       agent {
         kubernetes {
           yaml """
@@ -36,8 +39,8 @@ spec:
           sh '''
             echo "Building and pushing image to ECR..."
             /kaniko/executor \
-              --context $WORKSPACE \
-              --dockerfile $WORKSPACE/Dockerfile \
+              --context $WORKSPACE/nodeapp \
+              --dockerfile $WORKSPACE/dockerfile \
               --destination $ECR_REPO:latest \
               --destination $ECR_REPO:${GIT_COMMIT::7} \
               --reproducible
