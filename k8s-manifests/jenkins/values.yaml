@@ -1,0 +1,27 @@
+controller:
+  admin:
+    username: admin
+    password: password
+
+  installPlugins:
+    - kubernetes
+    - workflow-aggregator
+    - git
+    - configuration-as-code
+    - credentials-binding
+    - terraform
+    - docker-workflow
+    - github
+
+  serviceType: LoadBalancer
+
+  persistence:
+    enabled: true
+    existingClaim: jenkins-pvc   # 👈 tell Jenkins to reuse yours
+    # storageClass: gp2          # optional — not needed when using existingClaim
+
+  rbac:
+    create: true
+    role:
+      type: ClusterRole
+

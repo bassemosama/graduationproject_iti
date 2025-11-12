@@ -120,6 +120,15 @@ module "eks_addons" {
     module.nodegrp
   ]
 }
+module "jenkins" {
+  source       = "./jenkins"
+
+  depends_on = [
+    module.ekscluster,
+    module.nodegrp,
+    module.eks_addons
+  ]
+}
 module "db_secret" {
   source             = "./secretmanager"
   secret_name        = var.db_secret_name
