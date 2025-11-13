@@ -21,17 +21,17 @@ module "privatesubnet" {
   count  = length(var.privatesubnet-cidr)
   source = "./privatesubnets"
 
-  vpc_id            = module.myvpc.vpc_id
-  subnet-cidr       = var.privatesubnet-cidr[count.index]
-  azs               = var.azs[count.index]
-  tags              = var.tags
+  vpc_id      = module.myvpc.vpc_id
+  subnet-cidr = var.privatesubnet-cidr[count.index]
+  azs         = var.azs[count.index]
+  tags        = var.tags
 }
 
 
 module "myigw" {
-  source     = "./igw"
-  thevpc_id  = module.myvpc.vpc_id
-  tags       = var.tags
+  source    = "./igw"
+  thevpc_id = module.myvpc.vpc_id
+  tags      = var.tags
 }
 
 
@@ -76,7 +76,7 @@ module "privatetableassociation" {
 module "ekscluster" {
   source       = "./ekscluster"
   cluster_name = var.cluster_name
-  subnet_ids = [for s in module.privatesubnet : s.privatesubnet_id]
+  subnet_ids   = [for s in module.privatesubnet : s.privatesubnet_id]
 
   tags        = var.tags
   eks_version = var.eks_version
@@ -94,10 +94,10 @@ module "ekscluster" {
 module "nodegrp" {
   source       = "./nodegrp"
   cluster_name = var.cluster_name
-  subnet_ids = [for s in module.privatesubnet : s.privatesubnet_id]
+  subnet_ids   = [for s in module.privatesubnet : s.privatesubnet_id]
 
   depends_on = [
-    module.ekscluster  # 👈 ensures EKS cluster is ACTIVE before node group creation
+    module.ekscluster # 👈 ensures EKS cluster is ACTIVE before node group creation
   ]
 }
 
@@ -121,7 +121,7 @@ module "eks_addons" {
   ]
 }
 module "jenkins" {
-  source       = "./jenkins"
+  source = "./jenkins"
 
   depends_on = [
     module.ekscluster,

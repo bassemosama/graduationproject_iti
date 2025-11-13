@@ -14,29 +14,29 @@ variable "tags" {
 variable "subnet-cidr" {
   type        = list(string)
   description = "The CIDR block for the subnet"
- 
+
 }
 variable "privatesubnet-cidr" {
   type        = list(string)
   description = "The CIDR block for the subnet"
- 
+
 }
 variable "azs" {
-  type    = list(string)
-   
+  type = list(string)
+
 }
 
 variable "eks_version" {
-type = string
-default = "1.34"
-description = "EKS version"
+  type        = string
+  default     = "1.34"
+  description = "EKS version"
 }
 
 variable "cluster_name" {
-type = string
-default = "demo-eks-cluster"
-description = "value of the EKS cluster name"
-  
+  type        = string
+  default     = "demo-eks-cluster"
+  description = "value of the EKS cluster name"
+
 }
 
 variable "repository_name" {
@@ -60,7 +60,7 @@ variable "scan_on_push" {
 variable "ecrtags" {
   description = "Tags to assign to the repository"
   type        = map(string)
-  default     = {
+  default = {
     Environment = "dev"
     Project     = "EKS-CI"
   }
