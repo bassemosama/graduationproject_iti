@@ -7,7 +7,7 @@ pipeline {
 
   environment {
     AWS_REGION = "us-east-1"
-    ECR_REPO   = "865773021449.dkr.ecr.us-east-1.amazonaws.com/ourrepo"
+    ECR_REPO   = "662930028566.dkr.ecr.us-east-1.amazonaws.com/ourrepo"
   }
 
   stages {
