@@ -1,8 +1,67 @@
-helm:
-  parameters:
-  - name: app.image.repository
-    value: 662930028566.dkr.ecr.us-east-1.amazonaws.com/ourrepo
-    forcestring: true
-  - name: app.image.tag
-    value: v44
-    forcestring: true
+# Default values for nodeapp Helm chart
+
+app:
+  name: app
+  replicaCount: 2
+  image:
+    repository: 662930028566.dkr.ecr.us-east-1.amazonaws.com/ourrepo
+    tag: latest
+    pullPolicy: IfNotPresent
+  
+  service:
+    name: app-service
+    type: ClusterIP
+    port: 3000
+    targetPort: 3000
+  
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
+
+redis:
+  enabled: true
+  name: redis
+  image:
+    repository: redis
+    tag: latest
+    pullPolicy: IfNotPresent
+  
+  service:
+    name: redis-service
+    port: 6379
+    targetPort: 6379
+  
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
+
+config:
+  dbHostname: db-cluster.mysql-operator.svc.cluster.local
+  dbPort: "6450"
+  redisHostname: redis-service
+  redisPort: "6379"
+
+secrets:
+  dbUsername: root
+  dbPassword: pass123
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/proxy-body-size: "8m"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+  paths:
+    - path: /db
+      pathType: Prefix
+    - path: /redis
+      pathType: Prefix
