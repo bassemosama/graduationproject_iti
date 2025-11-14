@@ -142,3 +142,7 @@ module "redis_secret" {
   secret_description = var.redis_secret_description
   secret_values      = var.redis_secret_values
 }
+
+module "s3_test" {
+  source = "./s3-test"
+}

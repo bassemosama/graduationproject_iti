@@ -47,6 +47,9 @@ data "aws_iam_policy" "secrets_manager_read_write" {
   name = "SecretsManagerReadWrite"
 }
 
+
+
+
 # --- Attach Policies ---
 resource "aws_iam_role_policy_attachment" "jenkins_s3" {
   role       = aws_iam_role.jenkins_pod_identity.name
