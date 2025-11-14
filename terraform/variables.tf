@@ -95,3 +95,4 @@ variable "redis_secret_values" {
   description = "Redis connection map"
   type        = map(string)
 }
+#test pipline
