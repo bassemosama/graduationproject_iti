@@ -39,6 +39,10 @@ data "aws_iam_policy" "ec2_full_access" {
   name = "AmazonEC2FullAccess"
 }
 
+data "aws_iam_policy" "dynamodb_full_access" {
+  name = "AmazonDynamoDBFullAccess_v2" 
+}
+
 # --- Attach permissions policies using the data source ARNs ---
 
 resource "aws_iam_role_policy_attachment" "jenkins_s3" {
@@ -60,4 +64,9 @@ resource "aws_iam_role_policy_attachment" "jenkins_terraform" {
 resource "aws_iam_role_policy_attachment" "jenkins_ec2" {
   role       = aws_iam_role.jenkins_pod_identity.name
   policy_arn = data.aws_iam_policy.ec2_full_access.arn
+}
+
+resource "aws_iam_role_policy_attachment" "jenkins_dynamodb" {
+  role       = aws_iam_role.jenkins_pod_identity.name
+  policy_arn = data.aws_iam_policy.dynamodb_full_access.arn
 }
