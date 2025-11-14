@@ -91,7 +91,7 @@ spec:
           sh '''
             cd terraform
             terraform init -input=false
-            terraform apply -auto-approve -input=false
+            terraform plan -no-color -input=false
           '''
         }
       }
