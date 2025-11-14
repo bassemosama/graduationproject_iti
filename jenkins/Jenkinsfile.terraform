@@ -18,6 +18,8 @@ kind: Pod
 metadata:
   labels:
     jenkins: terraform
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::662930028566:role/JenkinsPodIdentityRole
 spec:
   serviceAccountName: jenkins
   containers:
