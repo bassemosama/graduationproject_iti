@@ -43,16 +43,23 @@ spec:
         }
       }
       steps {
-        container('kaniko') {
+       container('kaniko') {
           sh '''
             echo "Building and pushing image to ECR..."
+        
+            # Extract last 3 characters of the Git commit
+            SHORT_TAG=$(echo ${GIT_COMMIT} | tail -c 4)
+        
+            echo "Using tag: v.${SHORT_TAG}"
+        
             /kaniko/executor \
               --context $WORKSPACE \
               --dockerfile $WORKSPACE/dockerfile \
-              --destination $ECR_REPO:${GIT_COMMIT::7} \
+              --destination $ECR_REPO:v.${SHORT_TAG} \
               --reproducible
           '''
         }
+
       }
     }
 
