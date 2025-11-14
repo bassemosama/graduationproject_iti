@@ -1,0 +1,42 @@
+pipeline {
+  agent none
+
+  triggers {
+    githubPush()
+  }
+
+  stages {
+    stage('Terraform Init & Apply') {
+      when {
+        changeset "terraform/**"
+      }
+      agent {
+        kubernetes {
+          yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    jenkins: terraform
+spec:
+  serviceAccountName: jenkins
+  containers:
+  - name: terraform
+    image: hashicorp/terraform:1.9
+    command: [ "cat" ]
+    tty: true
+"""
+        }
+      }
+      steps {
+        container('terraform') {
+          sh '''
+            cd terraform
+            terraform init -input=false
+            terraform plan -no-color -input=false
+          '''
+        }
+      }
+    }
+  }
+}
