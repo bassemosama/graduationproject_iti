@@ -4,5 +4,5 @@ helm:
     value: 662930028566.dkr.ecr.us-east-1.amazonaws.com/ourrepo
     forcestring: true
   - name: app.image.tag
-    value: v55
+    value: v66
     forcestring: true
