@@ -37,8 +37,7 @@ spec:
         container('kaniko') {
           sh '''
             echo "Building and pushing image to ECR..."
-            SHORT_TAG=$BUILD_NUMBER
-
+            SHORT_TAG=$((BUILD_NUMBER + 50))
             /kaniko/executor \
               --context $WORKSPACE \
               --dockerfile $WORKSPACE/dockerfile \
