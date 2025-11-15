@@ -42,7 +42,7 @@ spec:
             /kaniko/executor \
               --context $WORKSPACE \
               --dockerfile $WORKSPACE/dockerfile \
-              --destination $ECR_REPO:v.${SHORT_TAG} \
+              --destination $ECR_REPO:v${SHORT_TAG} \
               --reproducible
           '''
         }
