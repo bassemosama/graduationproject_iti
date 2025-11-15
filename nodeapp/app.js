@@ -38,7 +38,7 @@ app.get('/redis', (req, res) => {
   client.set('foo','bar', (error, rep)=> {                
     if(error){     
 console.log(error);
-      res.send("redis connection failed");                             
+      res.send("redis connection : failed");                             
       return;                
   }                 
   if(rep){                          //JSON objects need to be parsed after reading from redis, since it is stringified before being stored into cache                      
@@ -50,4 +50,4 @@ console.log(error);
   app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
   })
-"// webhook test 11"
+"// webhook test 12"
