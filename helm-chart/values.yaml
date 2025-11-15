@@ -5,7 +5,7 @@ app:
   replicaCount: 2
   image:
     repository: 662930028566.dkr.ecr.us-east-1.amazonaws.com/ourrepo
-    tag: latest
+    tag: v66
     pullPolicy: IfNotPresent
   
   service:
