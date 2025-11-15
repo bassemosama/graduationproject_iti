@@ -4,13 +4,13 @@ metadata:
   name: myapp
   namespace: argocd
   annotations:
-     argocd-image-updater.argoproj.io/image-list: app=662930028566.dkr.ecr.us-east-1.amazonaws.com/ourrepo
-     argocd-image-updater.argoproj.io/app.update-strategy: newest-build
-     argocd-image-updater.argoproj.io/app.allow-tags: regexp:.*
-     argocd-image-updater.argoproj.io/app.registry-secret: argocd-image-updater-ecr
-     argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
-     argocd-image-updater.argoproj.io/app.helm.image-name: app.image.repository
-     argocd-image-updater.argoproj.io/app.helm.image-tag: app.image.tag
+    argocd-image-updater.argoproj.io/app.allow-tags: "regexp:^v[0-9]+$"
+    argocd-image-updater.argoproj.io/app.helm.image-name: "app.image.repository"
+    argocd-image-updater.argoproj.io/app.helm.image-tag: "app.image.tag"
+    argocd-image-updater.argoproj.io/app.update-strategy: "newest-tag"
+    argocd-image-updater.argoproj.io/image-list: "app=662930028566.dkr.ecr.us-east-1.amazonaws.com/ourrepo"
+    argocd-image-updater.argoproj.io/update-interval: "30s"
+    argocd-image-updater.argoproj.io/write-back-method: "git:secret:argocd/git-creds"
 
 
 
