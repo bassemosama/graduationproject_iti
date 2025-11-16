@@ -1,8 +1,8 @@
 helm:
   parameters:
   - name: app.image.repository
-    value: 662930028566.dkr.ecr.us-east-1.amazonaws.com/ourrepo
+    value: 865773021449.dkr.ecr.us-east-1.amazonaws.com/myrepo
     forcestring: true
   - name: app.image.tag
-    value: v101
+    value: v15
     forcestring: true

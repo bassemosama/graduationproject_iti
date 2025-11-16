@@ -4,8 +4,8 @@ app:
   name: app
   replicaCount: 2
   image:
-    repository: 662930028566.dkr.ecr.us-east-1.amazonaws.com/ourrepo
-    tag: v66
+    repository: 865773021449.dkr.ecr.us-east-1.amazonaws.com/myrepo
+    tag: v15
     pullPolicy: IfNotPresent
   
   service:
@@ -44,11 +44,11 @@ redis:
       memory: "256Mi"
 
 config:
-  dbHostname: db-cluster.mysql-operator.svc.cluster.local
-  dbPort: "6450"
+  dbHostname: mysql-service  # Changed
+  dbPort: "3306"             # Changed from 6450
   redisHostname: redis-service
   redisPort: "6379"
-
+  
 secrets:
   dbUsername: root
   dbPassword: pass123

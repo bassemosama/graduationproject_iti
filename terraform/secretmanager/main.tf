@@ -30,7 +30,7 @@ resource "aws_iam_policy" "secret_manager_policy" {
           "secretsmanager:DescribeSecret",
           "secretsmanager:ListSecrets"
         ]
-        Resource = aws_secretsmanager_secret.oursecret.arn
+        Resource = aws_secretsmanager_secret.mysecret.arn
       }
     ]
   })
@@ -43,14 +43,14 @@ resource "aws_iam_role_policy_attachment" "attach_secret_policy" {
 }
 
 
-resource "aws_secretsmanager_secret" "oursecret" {
+resource "aws_secretsmanager_secret" "mysecret" {
   name        = var.secret_name
   description = var.secret_description
 }
 
 
-resource "aws_secretsmanager_secret_version" "oursecret_version" {
-  secret_id     = aws_secretsmanager_secret.oursecret.id
+resource "aws_secretsmanager_secret_version" "mysecret_version" {
+  secret_id     = aws_secretsmanager_secret.mysecret.id
   secret_string = jsonencode(var.secret_values)
 }
 

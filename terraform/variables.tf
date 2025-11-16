@@ -42,7 +42,7 @@ variable "cluster_name" {
 variable "repository_name" {
   description = "ECR repository name"
   type        = string
-  default     = "ourrepo"
+  default     = "myrepo"
 }
 
 variable "image_tag_mutability" {

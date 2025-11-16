@@ -32,7 +32,7 @@ resource "aws_eks_node_group" "eks-demo-node-group" {
 cluster_name    = var.cluster_name
 node_role_arn   = aws_iam_role.demo-eks-ng-role.arn
 node_group_name = "demo-eks-node-group"
-#instance_types  = ["m7i-flex.large"]  
+instance_types  = ["m7i-flex.large"]  
 subnet_ids      =  var.subnet_ids
 scaling_config {
     desired_size = 2

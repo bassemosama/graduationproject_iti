@@ -9,6 +9,12 @@ var connection = mysql.createConnection({
   password : process.env.DB_PASSWORD,
   port     : process.env.DB_PORT
 });
+
+app.get('/', (req, res) => {
+    res.send('Hello World from ITI 45')
+  })
+
+  
 app.get("/db", (req, res) => {
 
 connection.connect(function(err) {

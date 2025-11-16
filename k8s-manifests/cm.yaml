@@ -4,7 +4,7 @@ metadata:
   name: mysql-config
   namespace: default
 data:
-  DB_HOSTNAME: db-cluster.mysql-operator.svc.cluster.local
-  DB_PORT: "6450"
-  REDIS_HOSTNAME: redis-service
-  REDIS_PORT: "6379"
+  DB_HOSTNAME: "mysql-service"        # Changed - use the actual service
+  DB_PORT: "3306"                      # Changed - correct MySQL port
+  REDIS_HOSTNAME: "redis-service"      # Correct
+  REDIS_PORT: "6379"                   # Correct
