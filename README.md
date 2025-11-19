@@ -3,6 +3,7 @@
 ## 📋 Project Overview
 
 This project demonstrates a complete end-to-end DevOps pipeline implementing Infrastructure as Code (IaC), Continuous Integration/Continuous Deployment (CI/CD), and GitOps practices on AWS. The application is a Node.js web service that connects to MySQL and Redis databases, deployed on Amazon EKS (Elastic Kubernetes Service).
+![Description of image](https://drive.google.com/uc?export=view&id=1INkL2Hs1obu0YGARZS_wuJEmPo2o00uh)
 
 ### Key Features
 
